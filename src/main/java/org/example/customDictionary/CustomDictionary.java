@@ -33,7 +33,7 @@ public class CustomDictionary {
                 throw new InvalidFileFormatException();
             }
 
-            Pair<String, String> entry = new Pair<>(split[0].strip(), split[1].strip());
+            Pair<String, String> entry = new Pair<>(split[0].strip().toLowerCase(), split[1].strip().toLowerCase());
             result.add(entry);
         }
 
@@ -41,6 +41,7 @@ public class CustomDictionary {
     }
 
     public String getTranslation(String key) {
+        key = key.toLowerCase();
         for (Pair<String, String> pair : memory) {
             if (pair.getKey().equals(key)) {
                 return pair.getValue();
@@ -50,10 +51,12 @@ public class CustomDictionary {
     }
 
     public boolean hasTranslation(String key) {
+        key = key.toLowerCase();
         return this.getTranslation(key) != null;
     }
 
     public List<String> getLongerKeys(String key) {
+        key = key.toLowerCase();
         List<String> list = new ArrayList<>();
         for (Pair<String, String> pair : memory) {
             String curKey = pair.getKey();
