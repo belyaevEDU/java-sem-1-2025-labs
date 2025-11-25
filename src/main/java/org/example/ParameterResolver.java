@@ -29,7 +29,7 @@ public class ParameterResolver {
             } catch (Exception ignored) {
             }
         }
-        throw new NoSuchMethodException("ERROR: Couldn't find resolvable constructor. Somehow");
+        throw new NoSuchMethodException("ERROR: Couldn't find a resolvable constructor. Somehow");
     }
 
     private static Object getDefaultPrimitiveValue(Class<?> type) {
