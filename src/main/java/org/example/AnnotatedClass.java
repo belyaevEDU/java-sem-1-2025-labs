@@ -11,7 +11,7 @@ public class AnnotatedClass {
     }
 
     @CustomAnnotation(parameter = 3)
-    protected void pro1() {
+    protected void pro1(SomeWeirdArgument someWeirdArgument) {
         System.out.println("pro1");
     }
 
@@ -24,7 +24,7 @@ public class AnnotatedClass {
     }
 
     @CustomAnnotation(parameter = 5)
-    private void pri2() {
+    private void pri2(String abc, int i, long l, SomeWeirdArgument someWeirdArgument) {
         System.out.println("pri2");
     }
 

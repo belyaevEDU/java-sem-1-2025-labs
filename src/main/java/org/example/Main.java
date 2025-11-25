@@ -18,9 +18,10 @@ public class Main {
                 for (int i = 0; i < annotation.parameter(); i++) {
                     try {
                         method.setAccessible(true);
-                        method.invoke(annotatedObject);
-                    } catch (IllegalAccessException | InvocationTargetException e) {
-                        System.out.println(e.getMessage());
+                        method.invoke(annotatedObject, ParameterResolver.resolveParameters(method.getParameterTypes()));
+                    } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException |
+                             InstantiationException e) {
+                        System.out.println("Error: " + e.getMessage());
                     }
                 }
             }
