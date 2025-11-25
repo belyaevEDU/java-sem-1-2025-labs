@@ -1,4 +1,4 @@
-package org.example.UserInteraction;
+package org.example.userInteraction;
 
 import java.util.ArrayList;
 import java.util.Optional;

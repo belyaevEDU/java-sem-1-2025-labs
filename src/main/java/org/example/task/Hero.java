@@ -1,5 +1,7 @@
 package org.example.task;
 
+import org.example.task.strategy.MovementStrategy;
+
 public class Hero {
     private String name;
     private MovementStrategy movementStrategy;
@@ -28,9 +30,7 @@ public class Hero {
     }
 
     public void move(Point newPoint) {
-        System.out.println(name + " "
-                + movementStrategy.movementMessage().strip()
-                + " from " + currentPoint + " to " + newPoint);
+        this.movementStrategy.move(this, newPoint);
         this.currentPoint = newPoint;
     }
 
@@ -59,6 +59,6 @@ public class Hero {
     public String toString() {
         return "name: " + name
                 + ", currentPoint: " + currentPoint
-                + ", movement strat message: \"" + movementStrategy.movementMessage() + "\"";
+                + ", movement strat: \"" + movementStrategy + "\"";
     }
 }

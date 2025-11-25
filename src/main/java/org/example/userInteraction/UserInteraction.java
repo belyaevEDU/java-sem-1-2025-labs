@@ -1,12 +1,15 @@
-package org.example.UserInteraction;
+package org.example.userInteraction;
 
 import org.example.task.Hero;
-import org.example.task.MovementStrategy;
+import org.example.task.strategy.HorseStrategy;
+import org.example.task.strategy.MovementStrategy;
 import org.example.task.Point;
+import org.example.task.strategy.PlaneStrategy;
+import org.example.task.strategy.WalkingStrategy;
 
 import java.util.*;
 
-import static org.example.UserInteraction.UIUtils.*;
+import static org.example.userInteraction.UIUtils.*;
 
 public class UserInteraction implements Runnable {
     private final Scanner scanner;
@@ -22,6 +25,7 @@ public class UserInteraction implements Runnable {
     }
 
     public void run() {
+        this.populateMovementStratList();
         this.mainMenu();
     }
 
@@ -32,20 +36,18 @@ public class UserInteraction implements Runnable {
         menu.put("1", this::listAllHeroes);
         menu.put("2", this::listAllMovementStrats);
         menu.put("3", this::createNewHero);
-        menu.put("4", this::createNewMovementStrat);
-        menu.put("5", this::modifyHero);
-        menu.put("6", this::moveHeroToNewPoint);
-        menu.put("7", this::deleteHero);
+        menu.put("4", this::modifyHero);
+        menu.put("5", this::moveHeroToNewPoint);
+        menu.put("6", this::deleteHero);
 
         while (running) {
             System.out.println("Main menu: ");
             System.out.println("1 - List all heroes");
             System.out.println("2 - List all movement strats");
             System.out.println("3 - Create new hero");
-            System.out.println("4 - Create new movement strat");
-            System.out.println("5 - Modify hero (name / movement strat)");
-            System.out.println("6 - Move hero to new point");
-            System.out.println("7 - Delete hero");
+            System.out.println("4 - Modify hero (name / movement strat)");
+            System.out.println("5 - Move hero to new point");
+            System.out.println("6 - Delete hero");
             System.out.println("-1 - Exit");
             System.out.print("\nEnter command by id: ");
             String commandId = this.scanner.nextLine().strip();
@@ -60,6 +62,12 @@ public class UserInteraction implements Runnable {
                 System.out.println("Command doesn't exist!");
             }
         }
+    }
+
+    private void populateMovementStratList() {
+        this.strats.add(new HorseStrategy());
+        this.strats.add(new PlaneStrategy());
+        this.strats.add(new WalkingStrategy());
     }
 
     private void listAllMovementStrats() {
@@ -128,15 +136,6 @@ public class UserInteraction implements Runnable {
         System.out.println("Success!");
     }
 
-    private void createNewMovementStrat() {
-        System.out.println("Message example: \"moved by Horse\"");
-        //System.out.println("How it will look: \"Hero !moved by Horse! from x: -1, y: 1 to x: 5, y: 15\"");
-        System.out.println("Enter the new movement strat's message: ");
-        String newMessage = this.scanner.nextLine().strip();
-        this.strats.add(new MovementStrategy(newMessage));
-        System.out.println("Success!");
-    }
-
     private Hero selectHero() {
         System.out.println("All heroes:");
         this.listAllHeroes();
@@ -182,7 +181,9 @@ public class UserInteraction implements Runnable {
         System.out.println("Enter new name: ");
         String newName = this.scanner.nextLine();
         if (this.getHeroByName(newName) == null) {
+            this.heroes.remove(hero);
             hero.setName(newName);
+            this.heroes.add(hero);
             System.out.println("Success!");
         } else {
             System.out.println("A hero with the name " + newName + " already exists!");
@@ -229,6 +230,6 @@ public class UserInteraction implements Runnable {
             return;
         }
 
-        System.out.println(this.heroes.remove(heroByName));
+        this.heroes.remove(heroByName);
     }
 }
