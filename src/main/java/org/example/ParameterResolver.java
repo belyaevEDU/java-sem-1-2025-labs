@@ -26,7 +26,7 @@ public class ParameterResolver {
                 constructor.setAccessible(true);
                 Object[] constructorArgs = resolveParameters(constructor.getParameterTypes());
                 return constructor.newInstance(constructorArgs);
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
         throw new NoSuchMethodException("ERROR: Couldn't find resolvable constructor. Somehow");
