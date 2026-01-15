@@ -1,7 +1,6 @@
 package org.example.customDictionary;
 
 import javafx.util.Pair;
-import org.example.utils.Utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;

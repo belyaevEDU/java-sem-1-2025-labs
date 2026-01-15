@@ -4,10 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-// handling punctuation
-// the punctuation is at the end of the word
-// so we remember the # of the words in the current token and the mark that is after it, apply after
-
 public class TranslationProcessor {
     private static String removeAllPunctuation(String toTransform) {
         final char[] punctuation = new char[]{'.', '\'', '"', ',', ';', '(', ')', '#', '$', '!', '?'};
