@@ -1,4 +1,4 @@
 package org.example.animals;
 
-public class Hedgehog extends Chordate {
+public class Hedgehog extends Erinaceidae {
 }
