@@ -1,5 +1,6 @@
 package org.example;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ public class ParameterResolver {
             return getDefaultPrimitiveValue(clazz);
         } else if (clazz == String.class) {
             return "";
+        } else if (clazz.isArray()) {
+            return Array.newInstance(clazz.getComponentType(), 1);
         }
 
         Constructor<?>[] constructors = clazz.getConstructors();
@@ -29,7 +32,7 @@ public class ParameterResolver {
             } catch (Exception ignored) {
             }
         }
-        throw new NoSuchMethodException("ERROR: Couldn't find a resolvable constructor. Somehow");
+        throw new NoSuchMethodException("ERROR: Couldn't find a resolvable constructor");
     }
 
     private static Object getDefaultPrimitiveValue(Class<?> type) {

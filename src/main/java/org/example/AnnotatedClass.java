@@ -24,7 +24,7 @@ public class AnnotatedClass {
     }
 
     @CustomAnnotation(parameter = 5)
-    private void pri2(String abc, int i, long l, SomeWeirdArgument someWeirdArgument) {
+    private void pri2(String abc, int[] i, long l, char c, SomeWeirdArgument someWeirdArgument) {
         System.out.println("pri2");
     }
 

@@ -10,7 +10,7 @@ public class Main {
 
         Class<AnnotatedClass> annotatedClass = AnnotatedClass.class;
         for (Method method : annotatedClass.getDeclaredMethods()) {
-            if (Modifier.isPublic(method.getModifiers())) {
+            if (!(Modifier.isPrivate(method.getModifiers()) || Modifier.isProtected(method.getModifiers()))) {
                 continue;
             }
             if (method.isAnnotationPresent(CustomAnnotation.class)) {
